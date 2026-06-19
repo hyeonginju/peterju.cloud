@@ -102,6 +102,11 @@ class ProjectsSection extends StatefulComponent {
       display: .flex,
       gap: Gap.all(10.px),
       margin: Spacing.only(bottom: 16.px),
+      raw: {
+        'overflow-x': 'auto',
+        'overflow-y': 'hidden',
+        '-webkit-overflow-scrolling': 'touch',
+      },
     ),
     css('.proj-img-thumb').styles(
       overflow: Overflow.hidden,
