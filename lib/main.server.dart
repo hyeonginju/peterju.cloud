@@ -12,6 +12,11 @@ void main() {
   runApp(Document(
     title: 'Ju Hyeongin | Product-Centered Problem Solver',
     head: [
+      RawText('<link rel="icon" type="image/x-icon" href="/favicon.ico">'),
+      RawText('<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">'),
+      RawText('<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">'),
+      RawText('<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">'),
+      RawText('<link rel="manifest" href="/site.webmanifest">'),
       RawText('<link rel="preconnect" href="https://fonts.googleapis.com">'),
       RawText('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">'),
       RawText('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap">'),
