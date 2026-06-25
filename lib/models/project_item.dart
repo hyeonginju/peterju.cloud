@@ -181,6 +181,8 @@ class SideProjectItem {
   final List<String> tags;
   final bool isPlaceholder;
   final String? logoAsset;
+  final String? logoColor;
+  final String? logoText;
 
   const SideProjectItem({
     required this.name,
@@ -190,6 +192,8 @@ class SideProjectItem {
     required this.tags,
     this.isPlaceholder = false,
     this.logoAsset,
+    this.logoColor,
+    this.logoText,
   });
 }
 
@@ -202,13 +206,17 @@ const List<SideProjectItem> sideProjects = [
     url: 'https://likiddesign.com/',
     tags: ['Branding', 'Web Design', 'Interactive'],
     logoAsset: 'assets/likid_logo.png',
+    logoText: 'LIKID',
   ),
   SideProjectItem(
-    name: 'App #1',
-    descKo: '모바일 앱 준비 중입니다.',
-    descEn: 'Mobile app in development.',
-    tags: ['Flutter', 'Mobile', 'iOS/Android'],
-    isPlaceholder: true,
+    name: 'Peters Weather',
+    descKo:
+        '기상청 공식 데이터는 신뢰할 수 있지만, 공식 앱의 UI는 너무 불편했습니다. 믿을 수 있는 데이터를 직관적이고 편한 UI로 제공하기 위해 직접 만들었습니다. 기획부터 디자인, 개발까지 AI 툴로 전체 워크플로우를 연결한 AI-driven 사이드 프로젝트.',
+    descEn:
+        'KMA\'s official data is reliable, but the official app\'s UI is frustratingly outdated. Built to deliver trustworthy weather data through a clean, intuitive interface. My first fully AI-driven project — connecting planning, design, and development through AI tools end-to-end.',
+    tags: ['Flutter', 'KMA API', 'AI-Driven'],
+    logoColor: '#38BDF8',
+    logoText: 'WEATHER',
   ),
   SideProjectItem(
     name: 'App #2',

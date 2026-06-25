@@ -47,7 +47,13 @@ class _SideProjectCardState extends State<SideProjectCard> {
       [
         div(classes: 'side-card-top', [
           div(classes: 'side-card-logo', [
-            span(classes: 'side-logo-text', [.text('LIKID')]),
+            span(
+              classes: 'side-logo-text',
+              attributes: proj.logoColor != null
+                  ? {'style': 'color: ${proj.logoColor}'}
+                  : {},
+              [.text(proj.logoText ?? proj.name)],
+            ),
           ]),
           div(classes: 'side-card-tags', [
             for (final tag in proj.tags) span(classes: 'side-tag', [.text(tag)]),
