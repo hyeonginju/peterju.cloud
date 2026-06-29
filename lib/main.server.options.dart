@@ -15,6 +15,8 @@ import 'package:peters_portfolio/components/project_card.dart' as _project_card;
 import 'package:peters_portfolio/components/projects_section.dart'
     as _projects_section;
 import 'package:peters_portfolio/components/quote_modal.dart' as _quote_modal;
+import 'package:peters_portfolio/components/side_project_modal.dart'
+    as _side_project_modal;
 import 'package:peters_portfolio/components/side_projects.dart'
     as _side_projects;
 import 'package:peters_portfolio/components/skills.dart' as _skills;
@@ -50,6 +52,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._project_card.SideProjectCard.styles,
     ..._projects_section.ProjectsSection.styles,
     ..._quote_modal.QuoteModal.styles,
+    ..._side_project_modal.SideProjectModal.styles,
     ..._side_projects.SideProjectsSection.styles,
     ..._skills.SkillsSection.styles,
   ],

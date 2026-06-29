@@ -7,8 +7,9 @@ import '../models/translation.dart';
 class SideProjectCard extends StatefulComponent {
   final SideProjectItem project;
   final String lang;
+  final void Function()? onSelect;
 
-  const SideProjectCard({required this.project, required this.lang, super.key});
+  const SideProjectCard({required this.project, required this.lang, this.onSelect, super.key});
 
   @override
   State<SideProjectCard> createState() => _SideProjectCardState();
@@ -38,11 +39,14 @@ class _SideProjectCardState extends State<SideProjectCard> {
       ]);
     }
 
+    final onSelect = component.onSelect;
+
     return div(
       classes: 'side-card ${_hovered ? 'side-card--hovered' : ''}',
       events: {
         'mouseenter': (_) => setState(() => _hovered = true),
         'mouseleave': (_) => setState(() => _hovered = false),
+        if (onSelect != null) 'click': (_) => onSelect(),
       },
       [
         div(classes: 'side-card-top', [
@@ -71,6 +75,10 @@ class _SideProjectCardState extends State<SideProjectCard> {
               classes: 'visit-btn',
               [.text(AppText.visitSite(lang))],
             ),
+          ]),
+        if (proj.url == null && onSelect != null && _hovered)
+          div(classes: 'side-card-action', [
+            span(classes: 'visit-btn', [.text(AppText.viewDetail(lang))]),
           ]),
       ],
     );

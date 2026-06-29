@@ -48,6 +48,7 @@ class AppText {
   // Side Projects
   static const sideTitle = Tr('사이드 프로젝트', 'Side Projects');
   static const visitSite = Tr('사이트 방문하기', 'Visit Website');
+  static const viewDetail = Tr('자세히 보기', 'View Details');
   static const comingSoon = Tr('출시 예정', 'Coming Soon');
 
   // Experience
