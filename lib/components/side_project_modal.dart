@@ -147,6 +147,7 @@ class SideProjectModal extends StatelessComponent {
         'overflow-x': 'auto',
         'overflow-y': 'hidden',
         '-webkit-overflow-scrolling': 'touch',
+        'flex-shrink': '0',
       },
     ),
     css('.sp-shot').styles(
