@@ -162,7 +162,7 @@ class SideProjectModal extends StatelessComponent {
       width: 100.percent,
       height: 100.percent,
       display: .block,
-      raw: {'object-fit': 'cover', 'object-position': 'top center'},
+      raw: {'object-fit': 'contain', 'object-position': 'center'},
     ),
     css('.sp-modal-body').styles(
       display: .flex,
