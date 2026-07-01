@@ -232,8 +232,8 @@ const List<SideProjectItem> sideProjects = [
     ],
     detailParasKo: [
       '기상청 공식 데이터는 국내에서 가장 정확하고 신뢰할 수 있지만, 정작 공식 앱의 UI는 복잡하고 불편해 그 좋은 데이터의 가치를 제대로 살리지 못했습니다. 믿을 수 있는 데이터를 누구나 한눈에 볼 수 있는 직관적인 화면으로 다시 설계하고 싶어 직접 개발을 시작했습니다.',
-      '기획부터 디자인, 개발까지 전 과정을 AI 툴로 연결한 첫 AI-driven 프로젝트입니다. 화면 설계와 카피라이팅, 코드 작성까지 AI와 협업하며 혼자서도 빠르게 완성도 높은 서비스를 만들었습니다.',
-      'GitHub Actions 기반 자동 배포 파이프라인을 구축하고, cron-job.org와 Firestore를 결합해 운영 비용 없이 동작하는 기상특보 푸시 알림 시스템을 만들었습니다. 또한 Flutter에 안드로이드 네이티브 코드를 결합해 홈 화면에서 바로 날씨를 확인할 수 있는 위젯을 직접 구현했습니다.',
+      '기획부터 디자인, 개발까지 전 과정을 AI 툴로 연결한 AI-driven 프로젝트입니다. 화면 설계와 카피라이팅, 코드 작성까지 AI와 협업하며 혼자서도 빠르게 완성도 높은 서비스를 만들었습니다.',
+      'GitHub Actions 기반 자동 배포 파이프라인을 구축하고, cron & Firestore를 결합해 운영 비용 없이 동작하는 기상특보 푸시 알림 시스템을 만들었습니다. 또한 Flutter에 안드로이드 네이티브 코드를 결합해 홈 화면에서 바로 날씨를 확인할 수 있는 위젯을 직접 구현했습니다.',
     ],
     detailParasEn: [
       'KMA\'s official data is the most accurate and reliable in Korea, yet the official app\'s clunky, dated UI never let that data shine. I built this app to deliver trustworthy weather through a clean, at-a-glance interface anyone can read instantly.',
