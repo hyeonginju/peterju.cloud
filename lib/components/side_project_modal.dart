@@ -28,37 +28,39 @@ class SideProjectModal extends StatelessComponent {
           classes: 'sp-modal-card',
           events: {'click': (e) {/* keep clicks inside the card */}},
           [
-            div(classes: 'sp-modal-header', [
-              div(classes: 'sp-modal-title-wrap', [
-                span(
-                  classes: 'sp-modal-logo',
-                  attributes: proj.logoColor != null ? {'style': 'color: ${proj.logoColor}'} : {},
-                  [.text(proj.logoText ?? proj.name)],
+            div(classes: 'sp-modal-scroll', [
+              div(classes: 'sp-modal-header', [
+                div(classes: 'sp-modal-title-wrap', [
+                  span(
+                    classes: 'sp-modal-logo',
+                    attributes: proj.logoColor != null ? {'style': 'color: ${proj.logoColor}'} : {},
+                    [.text(proj.logoText ?? proj.name)],
+                  ),
+                  span(classes: 'sp-modal-name', [.text(proj.name)]),
+                ]),
+                button(
+                  classes: 'sp-modal-close',
+                  onClick: onClose,
+                  [.text('✕')],
                 ),
-                span(classes: 'sp-modal-name', [.text(proj.name)]),
               ]),
-              button(
-                classes: 'sp-modal-close',
-                onClick: onClose,
-                [.text('✕')],
-              ),
-            ]),
-            div(classes: 'sp-modal-tags', [
-              for (final tag in proj.tags) span(classes: 'sp-modal-tag', [.text(tag)]),
-            ]),
-            if (proj.detailImages.isNotEmpty)
-              div(classes: 'sp-modal-shots', [
-                for (final shot in proj.detailImages)
-                  div(classes: 'sp-shot', [
-                    img(
-                      src: shot,
-                      classes: 'sp-shot-img',
-                      attributes: {'alt': '', 'loading': 'lazy'},
-                    ),
-                  ]),
+              div(classes: 'sp-modal-tags', [
+                for (final tag in proj.tags) span(classes: 'sp-modal-tag', [.text(tag)]),
               ]),
-            div(classes: 'sp-modal-body', [
-              for (final para in paras) p(classes: 'sp-modal-para', [.text(para)]),
+              if (proj.detailImages.isNotEmpty)
+                div(classes: 'sp-modal-shots', [
+                  for (final shot in proj.detailImages)
+                    div(classes: 'sp-shot', [
+                      img(
+                        src: shot,
+                        classes: 'sp-shot-img',
+                        attributes: {'alt': '', 'loading': 'lazy'},
+                      ),
+                    ]),
+                ]),
+              div(classes: 'sp-modal-body', [
+                for (final para in paras) p(classes: 'sp-modal-para', [.text(para)]),
+              ]),
             ]),
           ],
         ),
@@ -81,7 +83,6 @@ class SideProjectModal extends StatelessComponent {
     css('.sp-modal-card').styles(
       backgroundColor: Color('#FFFFFF'),
       radius: .all(.circular(20.px)),
-      padding: Spacing.all(32.px),
       maxWidth: 720.px,
       width: 100.percent,
       maxHeight: 88.vh,
@@ -89,8 +90,14 @@ class SideProjectModal extends StatelessComponent {
       border: Border.only(top: BorderSide(color: Color('#38BDF8'), width: 4.px)),
       display: .flex,
       flexDirection: .column,
+      overflow: Overflow.hidden,
+    ),
+    css('.sp-modal-scroll').styles(
+      padding: Spacing.all(32.px),
+      display: .flex,
+      flexDirection: .column,
       gap: Gap.all(16.px),
-      raw: {'overflow-y': 'auto'},
+      raw: {'overflow-y': 'auto', 'min-height': '0'},
     ),
     css('.sp-modal-header').styles(
       display: .flex,
@@ -177,7 +184,7 @@ class SideProjectModal extends StatelessComponent {
       raw: {'line-height': '1.8'},
     ),
     css.media(MediaQuery.all(maxWidth: 640.px), [
-      css('.sp-modal-card').styles(
+      css('.sp-modal-scroll').styles(
         padding: Spacing.all(24.px),
       ),
       css('.sp-shot').styles(
