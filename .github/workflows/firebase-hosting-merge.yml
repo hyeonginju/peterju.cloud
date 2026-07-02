@@ -36,3 +36,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PETER_WITH_FLUTTER }}
           channelId: live
           projectId: peter-with-flutter
+          firebaseToolsVersion: 15.21.0
