@@ -104,7 +104,7 @@ class SkillsSection extends StatelessComponent {
       display: .block,
       fontSize: 0.75.rem,
       fontWeight: .w700,
-      color: Color('#94A3B8'),
+      color: Color('#000000'),
       letterSpacing: 0.08.em,
       textTransform: TextTransform.upperCase,
       margin: Spacing.only(bottom: 16.px),
