@@ -15,10 +15,10 @@ class AppText {
   static const langEn = Tr('EN', 'EN');
 
   // Hero
-  static const heroTag = Tr('Product-Centered Problem Solver', 'Product-Centered Problem Solver');
+  static const heroTag = Tr('FORWARD DEPLOYED ENGINEER', 'FORWARD DEPLOYED ENGINEER');
   static const heroHeadline = Tr(
-    '사용자의 페인 포인트를 명확히 진단하고,\n제품 중심의 솔루션으로 비즈니스 가치를 극대화합니다.',
-    'Diagnosing user pain points precisely,\nmaximizing business value through product-centered solutions.',
+    '코드 너머의 비즈니스 문제를 해결합니다.',
+    'Solving business problems,\nnot just writing code',
   );
   static const heroDescription = Tr(
     '제조 공장 현장에서 스타트업 팀리드까지 — 실전에서 답을 찾는 문제해결자',
