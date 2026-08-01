@@ -2,8 +2,9 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
 import '../models/project_item.dart';
+import '../models/translation.dart';
 
-class SideProjectModal extends StatelessComponent {
+class SideProjectModal extends StatefulComponent {
   final SideProjectItem project;
   final String lang;
   final void Function() onClose;
@@ -16,9 +17,25 @@ class SideProjectModal extends StatelessComponent {
   });
 
   @override
+  State<SideProjectModal> createState() => _SideProjectModalState();
+
+  @css
+  static final List<StyleRule> styles = _SideProjectModalState._styles;
+}
+
+class _SideProjectModalState extends State<SideProjectModal> {
+  String? _lightboxSrc;
+
+  void _openLightbox(String src) => setState(() => _lightboxSrc = src);
+  void _closeLightbox() => setState(() => _lightboxSrc = null);
+
+  @override
   Component build(BuildContext context) {
-    final proj = project;
+    final proj = component.project;
+    final lang = component.lang;
+    final onClose = component.onClose;
     final paras = lang == 'ko' ? proj.detailParasKo : proj.detailParasEn;
+    final tags = proj.modalTags.isNotEmpty ? proj.modalTags : proj.tags;
 
     return div(
       classes: 'sp-modal-overlay',
@@ -26,13 +43,13 @@ class SideProjectModal extends StatelessComponent {
       [
         div(
           classes: 'sp-modal-card',
-          events: {'click': (e) {/* keep clicks inside the card */}},
+          events: {'click': (e) => e.stopPropagation()},
           [
             div(classes: 'sp-modal-scroll', [
               div(classes: 'sp-modal-header', [
                 div(classes: 'sp-modal-title-wrap', [
                   span(
-                    classes: 'sp-modal-logo',
+                    classes: 'sp-modal-logo ${proj.logoIsKorean ? 'sp-modal-logo--ko' : ''}',
                     attributes: proj.logoColor != null ? {'style': 'color: ${proj.logoColor}'} : {},
                     [.text(proj.logoText ?? proj.name)],
                   ),
@@ -45,31 +62,66 @@ class SideProjectModal extends StatelessComponent {
                 ),
               ]),
               div(classes: 'sp-modal-tags', [
-                for (final tag in proj.tags) span(classes: 'sp-modal-tag', [.text(tag)]),
+                for (final tag in tags) span(classes: 'sp-modal-tag', [.text(tag)]),
               ]),
               if (proj.detailImages.isNotEmpty)
                 div(classes: 'sp-modal-shots', [
                   for (final shot in proj.detailImages)
-                    div(classes: 'sp-shot', [
-                      img(
-                        src: shot,
-                        classes: 'sp-shot-img',
-                        attributes: {'alt': '', 'loading': 'lazy'},
-                      ),
-                    ]),
+                    div(
+                      classes: 'sp-shot',
+                      events: {'click': (_) => _openLightbox(shot)},
+                      [
+                        img(
+                          src: shot,
+                          classes: 'sp-shot-img',
+                          attributes: {'alt': '', 'loading': 'lazy'},
+                        ),
+                      ],
+                    ),
                 ]),
               div(classes: 'sp-modal-body', [
                 for (final para in paras) p(classes: 'sp-modal-para', [.text(para)]),
               ]),
+              if (proj.url != null)
+                div(classes: 'sp-modal-link', [
+                  a(
+                    href: proj.url!,
+                    target: Target.blank,
+                    attributes: {'rel': 'noopener noreferrer'},
+                    classes: 'visit-btn',
+                    [.text(AppText.visitSite(lang))],
+                  ),
+                ]),
             ]),
           ],
         ),
+        if (_lightboxSrc != null)
+          div(
+            classes: 'lightbox-overlay',
+            events: {
+              'click': (e) {
+                e.stopPropagation();
+                _closeLightbox();
+              },
+            },
+            [
+              img(
+                src: _lightboxSrc!,
+                classes: 'lightbox-img',
+                attributes: {'alt': ''},
+              ),
+              div(
+                classes: 'lightbox-close',
+                events: {'click': (_) => _closeLightbox()},
+                [.text('×')],
+              ),
+            ],
+          ),
       ],
     );
   }
 
-  @css
-  static final List<StyleRule> styles = [
+  static final List<StyleRule> _styles = [
     css('.sp-modal-overlay').styles(
       position: Position.fixed(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
       zIndex: ZIndex(200),
@@ -116,6 +168,11 @@ class SideProjectModal extends StatelessComponent {
       color: Color('#38BDF8'),
       letterSpacing: (-0.02).em,
       fontFamily: FontFamily.list(const [FontFamily('Impact'), FontFamilies.sansSerif]),
+    ),
+    css('.sp-modal-logo--ko').styles(
+      fontSize: 1.25.rem,
+      fontWeight: .w800,
+      fontFamily: .inherit,
     ),
     css('.sp-modal-name').styles(
       fontSize: 0.875.rem,
@@ -164,7 +221,12 @@ class SideProjectModal extends StatelessComponent {
       radius: .all(.circular(12.px)),
       border: Border.all(color: Color('#E2E8F0'), width: 1.px),
       backgroundColor: Color('#F1F5F9'),
+      cursor: .pointer,
+      transition: Transition('border-color', duration: const Duration(milliseconds: 150)),
       raw: {'flex-shrink': '0'},
+    ),
+    css('.sp-shot:hover').styles(
+      border: Border.all(color: Color('#38BDF8'), width: 1.px),
     ),
     css('.sp-shot-img').styles(
       width: 100.percent,
@@ -176,6 +238,9 @@ class SideProjectModal extends StatelessComponent {
       display: .flex,
       flexDirection: .column,
       gap: Gap.all(14.px),
+    ),
+    css('.sp-modal-link').styles(
+      margin: Spacing.only(top: 4.px),
     ),
     css('.sp-modal-para').styles(
       fontSize: 0.9375.rem,

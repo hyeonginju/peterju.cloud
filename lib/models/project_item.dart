@@ -183,6 +183,8 @@ class SideProjectItem {
   final String? logoAsset;
   final String? logoColor;
   final String? logoText;
+  final bool logoIsKorean;
+  final List<String> modalTags;
   final List<String> detailImages;
   final List<String> detailParasKo;
   final List<String> detailParasEn;
@@ -197,6 +199,8 @@ class SideProjectItem {
     this.logoAsset,
     this.logoColor,
     this.logoText,
+    this.logoIsKorean = false,
+    this.modalTags = const [],
     this.detailImages = const [],
     this.detailParasKo = const [],
     this.detailParasEn = const [],
@@ -242,10 +246,35 @@ const List<SideProjectItem> sideProjects = [
     ],
   ),
   SideProjectItem(
-    name: 'App #2',
-    descKo: '모바일 앱 준비 중입니다.',
-    descEn: 'Mobile app in development.',
-    tags: ['Flutter', 'Mobile', 'iOS/Android'],
-    isPlaceholder: true,
+    name: 'HAZARD FIGHTER',
+    descKo:
+        '국가의 공공 API를 이용하면 믿을 수 있는 재난 데이터를 확보할 수 있습니다. 그 데이터를 가공해서 제때 경고가 필요한 사람에게 전달하는 프로젝트입니다. 기상특보·지진·홍수·긴급재난문자 4종 공공 API를 하나의 파이프라인으로 묶어 개인의 상황에 맞춰 위험도를 판단하고, 구독한 사람에게만 푸시를 보내는 백엔드를 설계하고 클라우드로 운영합니다.',
+    descEn:
+        'Trustworthy disaster data already exists — the government publishes it through public APIs. This project turns that raw data into the right alert, delivered to the right person who need that alert, at the right moment. Four public-data APIs (weather alerts, earthquakes, floods, and emergency broadcasts) are unified into a single pipeline that scores risk against each persons context and pushes notifications only to subscribers — a backend I designed and run on the cloud.',
+    url: 'https://hazard.peterju.cloud/app',
+    tags: ['FastAPI', 'PostgreSQL', 'Docker'],
+    modalTags: ['FastAPI', 'PostgreSQL', 'Docker', 'Python', '공공데이터 API', 'LLM'],
+    logoColor: '#F97316',
+    logoText: '시켜줘, 명예소방관',
+    logoIsKorean: true,
+    detailImages: [
+      'assets/project/hazard/hazard1.jpeg',
+      'assets/project/hazard/hazard2.jpeg',
+      'assets/project/hazard/hazard3.jpeg',
+    ],
+    detailParasKo: [
+      '"믿을 수 있는 데이터를, 위험한 순간에, 맞는 사람에게 어떻게 자동으로 전달할까?" 이건 화면의 문제가 아니라 데이터 파이프라인과 인프라의 문제였습니다.',
+      '사용자·보호대상·지역·구독·이벤트·알림 등 13개 테이블을 SQLAlchemy로 모델링하고 Alembic으로 스키마 변경을 버전 관리했습니다. 운영은 PostgreSQL을 쓰되 모델에 다이얼렉트 호환 타입을 적용해 DB 서버 없이도 테스트 144개가 전부 도는 구조로 만들었고, 앱과 Postgres를 docker-compose로 묶었습니다.',
+      '기상특보·지진·홍수통제소·긴급재난문자 4종은 소스마다 응답 형식, 인증 방식, 호출 한도, 지역 표기가 전부 달랐습니다. 문서만 보고 짠 코드는 실데이터 앞에서 대부분 틀렸고(특보는 관서 단위라 지역이 안 나오고, 지진은 필수 파라미터가 숨어 있고, 홍수통제소는 해외 IP를 차단), 실응답을 직접 떠서 하나씩 교정했습니다. 서로 다른 지역명은 이름 기반 매칭으로 이어 붙이고, 소스 하나가 죽어도 나머지는 처리되도록 에러를 격리했습니다.',
+      '수집한 이벤트를 구독자의 상황(나이대·건강 태그)과 맞춰 결정론적 규칙으로 1차 판단하고, 규칙 밖 케이스만 LLM으로 보조 판단하는 2계층 엔진을 붙였습니다. 알림 문구도 LLM이 개인 특성에 맞춰 생성하되 LLM이 죽어도 서비스가 멈추지 않도록 유료→무료→템플릿 3단 폴백을 뒀고, 최종 발송은 FCM 웹푸시로 생성과 발송을 분리해 중복 발송을 막았습니다.',
+      'GCP Cloud Run에 배포하고, 주기 수집은 Cloud Scheduler로 앱 밖에 빼서 인스턴스가 늘어도 호출량이 곱해지지 않게 했습니다. DB는 Neon(관리형 PostgreSQL)을 같은 리전에 두고 도메인·HTTPS까지 연결해 24시간 무중단으로 운영 중입니다. 배포 3일 뒤 점검에서 겉보기 지표는 정상인데 알림만 안 나가던 "조용한 실패"를 찾아 관측성을 보강한 것까지가 이 프로젝트입니다.',
+    ],
+    detailParasEn: [
+      'My previous side project (WEATHER) solved "the KMA data is reliable but the official app\'s UI is painful." The next question was obvious — "how do I automatically deliver trustworthy data to the right person the moment it matters?" That\'s not a UI problem; it\'s a data-pipeline and infrastructure problem, so I took it head-on as a backend build.',
+      'I modeled 13 tables (users, protected persons, regions, subscriptions, events, notifications, …) with SQLAlchemy and version-controlled schema changes with Alembic. Production runs on PostgreSQL, but dialect-compatible column types let all 144 tests run without a database server, and bundling the app with Postgres via docker-compose killed the "works on my machine" problem.',
+      'Weather alerts, earthquakes, flood gauges, and emergency broadcasts each had different response shapes, auth, rate limits, and region naming. Code written from docs alone mostly broke against real data (alerts came at bureau granularity with no region, earthquakes hid a required parameter, the flood API blocked foreign IPs), so I captured real responses and corrected each mapping by hand. Mismatched region names are bridged with name-based matching, and errors are isolated per source so one dead source doesn\'t stop the rest.',
+      'A two-layer engine scores each event against the subscriber\'s context (age group, health tags): deterministic rules decide first, and only ambiguous cases fall through to an LLM. Alert copy is LLM-generated per person, but a paid → free → template three-stage fallback keeps the service running when the LLM is down, and final delivery goes out over FCM web push with generation and dispatch separated to prevent duplicate sends.',
+      'I shipped it to GCP Cloud Run, with periodic collection pulled out of the app into Cloud Scheduler so call volume doesn\'t multiply as instances scale. The DB is Neon (managed PostgreSQL) in the same region, with domain and HTTPS wired up — running 24/7. Three days after launch I caught a "silent failure" where every surface metric was green yet alerts quietly weren\'t going out, and hardened observability around it.',
+    ],
   ),
 ];

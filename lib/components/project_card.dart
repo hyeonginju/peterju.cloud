@@ -52,7 +52,7 @@ class _SideProjectCardState extends State<SideProjectCard> {
         div(classes: 'side-card-top', [
           div(classes: 'side-card-logo', [
             span(
-              classes: 'side-logo-text',
+              classes: 'side-logo-text ${proj.logoIsKorean ? 'side-logo-text--ko' : ''}',
               attributes: proj.logoColor != null
                   ? {'style': 'color: ${proj.logoColor}'}
                   : {},
@@ -66,7 +66,11 @@ class _SideProjectCardState extends State<SideProjectCard> {
         p(classes: 'side-card-desc', [
           .text(lang == 'ko' ? proj.descKo : proj.descEn),
         ]),
-        if (proj.url != null && _hovered)
+        if (onSelect != null && _hovered)
+          div(classes: 'side-card-action', [
+            span(classes: 'visit-btn', [.text(AppText.viewDetail(lang))]),
+          ]),
+        if (onSelect == null && proj.url != null && _hovered)
           div(classes: 'side-card-action', [
             a(
               href: proj.url!,
@@ -75,10 +79,6 @@ class _SideProjectCardState extends State<SideProjectCard> {
               classes: 'visit-btn',
               [.text(AppText.visitSite(lang))],
             ),
-          ]),
-        if (proj.url == null && onSelect != null && _hovered)
-          div(classes: 'side-card-action', [
-            span(classes: 'visit-btn', [.text(AppText.viewDetail(lang))]),
           ]),
       ],
     );
@@ -110,7 +110,7 @@ class _SideProjectCardState extends State<SideProjectCard> {
     css('.side-card-top').styles(
       display: .flex,
       justifyContent: .spaceBetween,
-      alignItems: AlignItems.start,
+      alignItems: .center,
     ),
     css('.side-card-logo').styles(
       display: .flex,
@@ -122,6 +122,13 @@ class _SideProjectCardState extends State<SideProjectCard> {
       color: Color('#AACC00'),
       letterSpacing: (-0.03).em,
       fontFamily: FontFamily.list(const [FontFamily('Impact'), FontFamilies.sansSerif]),
+    ),
+    css('.side-logo-text--ko').styles(
+      fontSize: 1.25.rem,
+      fontWeight: .w800,
+      letterSpacing: (-0.02).em,
+      fontFamily: .inherit,
+      raw: {'word-break': 'keep-all', 'line-height': '31px'},
     ),
     css('.side-card-tags').styles(
       display: .flex,
