@@ -250,7 +250,7 @@ const List<SideProjectItem> sideProjects = [
     descKo:
         '국가의 공공 API를 이용하면 믿을 수 있는 재난 데이터를 확보할 수 있습니다. 그 데이터를 가공해서 제때 경고가 필요한 사람에게 전달하는 프로젝트입니다. 기상특보·지진·홍수·긴급재난문자 4종 공공 API를 하나의 파이프라인으로 묶어 개인의 상황에 맞춰 위험도를 판단하고, 구독한 사람에게만 푸시를 보내는 백엔드를 설계하고 클라우드로 운영합니다.',
     descEn:
-        'Trustworthy disaster data already exists — the government publishes it through public APIs. This project turns that raw data into the right alert, delivered to the right person who need that alert, at the right moment. Four public-data APIs (weather alerts, earthquakes, floods, and emergency broadcasts) are unified into a single pipeline that scores risk against each persons context and pushes notifications only to subscribers — a backend I designed and run on the cloud.',
+        'Trustworthy disaster data already exists — the government publishes it through public APIs. This project turns that raw data into the right alert, delivered to the right person who needs that alert, at the right moment. Four public-data APIs (weather alerts, earthquakes, floods, and emergency broadcasts) are unified into a single pipeline that scores risk against each persons context and pushes notifications only to subscribers — a backend I designed and run on the cloud.',
     url: 'https://hazard.peterju.cloud/app',
     tags: ['FastAPI', 'PostgreSQL', 'Docker'],
     modalTags: ['FastAPI', 'PostgreSQL', 'Docker', 'Python', '공공데이터 API', 'LLM'],
