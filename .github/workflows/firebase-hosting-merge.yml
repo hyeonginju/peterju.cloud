@@ -19,16 +19,14 @@ jobs:
         with:
           sdk: stable
 
-      # 2. Jaspr CLI 글로벌 설치
-      - name: Install Jaspr CLI
-        run: dart pub global activate jaspr_cli
-
-      # 3. 의존성 추가 및 Jaspr 빌드 (환경 변수 PATH 추가 필수)
+      # 2. 의존성 설치 및 Jaspr 빌드
+      # jaspr_cli는 dev_dependencies로 관리한다. 전역 설치(pub global activate)는
+      # 매번 잠금 없이 의존성을 새로 해석해서 프로젝트의 build_daemon 버전과
+      # 어긋날 수 있으므로 쓰지 않는다.
       - name: Build Jaspr Project
         run: |
           dart pub get
-          export PATH="$PATH":"$HOME/.pub-cache/bin"
-          jaspr build
+          dart run jaspr_cli:jaspr build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
