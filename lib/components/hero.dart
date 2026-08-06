@@ -56,7 +56,7 @@ class HeroSection extends StatelessComponent {
       ]),
       div(classes: 'hero-stats', [
         _statCard('5+', lang == 'ko' ? 'End to End 프로젝트' : 'End to End Projects'),
-        _statCard('50%', lang == 'ko' ? 'AI 비용 절감' : 'AI Cost Cut'),
+        _statCard('50%', lang == 'ko' ? 'AI 토큰 비용 절감' : 'AI token Cost Cut'),
         _statCard('60%', lang == 'ko' ? '운용비용 절감' : 'Operating Cost Cut'),
         _statCard('4', lang == 'ko' ? '배포 플랫폼' : 'Deploy Platforms', 'iOS · AOS · Web · Windows'),
       ]),
