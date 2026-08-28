@@ -8,35 +8,29 @@ class SkillsSection extends StatelessComponent {
 
   const SkillsSection({required this.lang, super.key});
 
-  static const _languages = ['Dart', 'JavaScript', 'Python'];
+  static const _languages = ['Dart', 'JavaScript', 'TypeScript', 'Python'];
   static const _frameworks = [
     'Flutter',
     'BLoC',
     'Provider',
-    'Riverpod',
     'goRouter',
     'React Native',
-    'Redux',
+    'Next.js',
+    'Nest.js',
     'FastAPI',
-    'SQLAlchemy',
-    'Alembic',
   ];
   static const _platforms = ['Android', 'iOS', 'Web', 'Windows'];
   static const _tools = [
     'OpenAI API',
     'Claude',
-    'Gemini',
     'Codex',
     'socket.io',
     'Git',
     'Firebase',
     'Docker',
     'PostgreSQL',
-    'GCP Cloud Run',
     'GCP',
     'Figma',
-    'Slack',
-    'Redmine',
   ];
 
   @override

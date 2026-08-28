@@ -19,7 +19,7 @@ class _EduItem {
 
 const _eduItems = [
   _EduItem(
-    year: '2026',
+    year: '2026.12',
     titleKo: '컴퓨터공학 학사 학위 — 학점은행제',
     titleEn: 'B.S. Computer Science — Credit Bank System',
     isExpected: true,

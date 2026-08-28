@@ -68,13 +68,13 @@ class _SideProjectModalState extends State<SideProjectModal> {
                 div(classes: 'sp-modal-shots', [
                   for (final shot in proj.detailImages)
                     div(
-                      classes: 'sp-shot',
+                      classes: 'sp-shot ${proj.detailImagesAreLandscape ? 'sp-shot--landscape' : ''}',
                       events: {'click': (_) => _openLightbox(shot)},
                       [
                         img(
                           src: shot,
                           classes: 'sp-shot-img',
-                          attributes: {'alt': '', 'loading': 'lazy'},
+                          attributes: {'alt': ''},
                         ),
                       ],
                     ),
@@ -165,7 +165,7 @@ class _SideProjectModalState extends State<SideProjectModal> {
     css('.sp-modal-logo').styles(
       fontSize: 1.5.rem,
       fontWeight: .w900,
-      color: Color('#38BDF8'),
+      color: Color('#AACC00'),
       letterSpacing: (-0.02).em,
       fontFamily: FontFamily.list(const [FontFamily('Impact'), FontFamilies.sansSerif]),
     ),
@@ -225,6 +225,10 @@ class _SideProjectModalState extends State<SideProjectModal> {
       transition: Transition('border-color', duration: const Duration(milliseconds: 150)),
       raw: {'flex-shrink': '0'},
     ),
+    css('.sp-shot--landscape').styles(
+      width: 420.px,
+      height: 260.px,
+    ),
     css('.sp-shot:hover').styles(
       border: Border.all(color: Color('#38BDF8'), width: 1.px),
     ),
@@ -255,6 +259,10 @@ class _SideProjectModalState extends State<SideProjectModal> {
       css('.sp-shot').styles(
         width: 160.px,
         height: 336.px,
+      ),
+      css('.sp-shot--landscape').styles(
+        width: 280.px,
+        height: 174.px,
       ),
     ]),
   ];

@@ -219,6 +219,29 @@ class ProjectsSection extends StatefulComponent {
       margin: .zero,
       raw: {'line-height': '1.7'},
     ),
+    css('.proj-notes').styles(
+      display: .flex,
+      flexDirection: .column,
+      gap: Gap.all(12.px),
+      margin: Spacing.only(top: 20.px),
+      padding: Spacing.only(top: 20.px),
+      border: Border.only(
+        top: BorderSide(color: Color('#E2E8F0'), width: 1.px),
+      ),
+    ),
+    css('.notes-label').styles(
+      fontSize: 0.75.rem,
+      fontWeight: .w700,
+      color: Color('#94A3B8'),
+      letterSpacing: 0.05.em,
+      textTransform: TextTransform.upperCase,
+    ),
+    css('.notes-text').styles(
+      fontSize: 0.9375.rem,
+      color: Color('#475569'),
+      margin: .zero,
+      raw: {'line-height': '1.8'},
+    ),
     css('.proj-impact').styles(
       display: .flex,
       flexDirection: .column,
@@ -310,6 +333,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
   Component _buildCard(ProjectItem p, int idx, String lang, bool isKey) {
     final isOpen = _expanded == idx;
+    final paras = lang == 'ko' ? p.detailParasKo : p.detailParasEn;
     return div(
       classes: 'proj-card ${isKey ? 'proj-card--key' : ''} ${isOpen ? 'proj-card--open' : ''}',
       [
@@ -347,7 +371,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                       img(
                         src: imgSrc,
                         classes: 'proj-thumb-img',
-                        attributes: {'alt': '', 'loading': 'lazy'},
+                        attributes: {'alt': ''},
                       ),
                     ],
                   ),
@@ -363,6 +387,11 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 .text(lang == 'ko' ? p.impactKo : p.impactEn),
               ]),
             ]),
+            if (paras.isNotEmpty)
+              div(classes: 'proj-notes', [
+                span(classes: 'notes-label', [.text(AppText.projectDeepDive(lang))]),
+                for (final para in paras) div(classes: 'notes-text', [.text(para)]),
+              ]),
           ]),
       ],
     );

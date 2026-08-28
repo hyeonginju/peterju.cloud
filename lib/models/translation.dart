@@ -15,14 +15,14 @@ class AppText {
   static const langEn = Tr('EN', 'EN');
 
   // Hero
-  static const heroTag = Tr('FORWARD DEPLOYED ENGINEER', 'FORWARD DEPLOYED ENGINEER');
+  static const heroTag = Tr('SOFTWARE ENGINEER', 'SOFTWARE ENGINEER');
   static const heroHeadline = Tr(
     '코드 너머의 비즈니스 문제를 해결합니다.',
     'Solving business problems,\nnot just writing code',
   );
   static const heroDescription = Tr(
-    '제조 공장 현장에서 스타트업 팀리드까지 — 실전에서 답을 찾는 문제해결자',
-    'From factory floor to startup team lead — a problem solver who finds answers in the field.',
+    '제조 공장 현장에서 스타트업 리드까지 — 실전에서 답을 찾는 엔지니어',
+    'From factory floor to startup lead — an engineer who finds answers in the field.',
   );
   static const heroCta = Tr('프로젝트 보기', 'View Projects');
   static const heroContact = Tr('연락하기', 'Contact');
@@ -44,6 +44,7 @@ class AppText {
   static const projectAction = Tr('행동', 'Action');
   static const projectResult = Tr('결과', 'Result');
   static const projectImpact = Tr('비즈니스 임팩트', 'Business Impact');
+  static const projectDeepDive = Tr('설계 기록', 'Engineering Notes');
 
   // Side Projects
   static const sideTitle = Tr('사이드 프로젝트', 'Side Projects');

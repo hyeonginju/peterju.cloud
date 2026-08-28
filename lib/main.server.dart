@@ -10,7 +10,7 @@ void main() {
   Jaspr.initializeApp(options: defaultServerOptions);
 
   runApp(Document(
-    title: 'Ju Hyeongin | Product-Centered Problem Solver',
+    title: 'Ju Hyeongin | Software Engineer',
     head: [
       RawText('<link rel="icon" type="image/x-icon" href="/favicon.ico">'),
       RawText('<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">'),
@@ -23,7 +23,7 @@ void main() {
       RawText('<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>'),
       RawText('<script src="physics.js" defer></script>'),
       RawText('<meta name="viewport" content="width=device-width, initial-scale=1">'),
-      RawText('<meta name="description" content="Portfolio of Ju Hyeongin — Product-Centered Problem Solver. Flutter &amp; Dart developer.">'),
+      RawText('<meta name="description" content="Portfolio of Ju Hyeongin — Software Engineer. Flutter multiplatform apps, AI agents, and backend/infra built end to end.">'),
     ],
     styles: [
       css('*, *::before, *::after').styles(
