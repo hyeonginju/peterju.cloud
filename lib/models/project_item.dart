@@ -99,7 +99,7 @@ const List<ProjectItem> allProjects = [
   ProjectItem(
     titleKo: '시켜줘, 명예소방관 — 개인화 재난 경보',
     titleEn: 'Hazard Fighter — Personalized Disaster Alerts',
-    period: '2026.07 — 진행 중',
+    period: '2026.07',
     orgKo: '개인 프로젝트 / 기획 · 백엔드 · 인프라 운영',
     orgEn: 'Personal Project / Planning, Backend, Infra Ops',
     stackStr: 'Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Docker, GCP Cloud Run, Web Push',

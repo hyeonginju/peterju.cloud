@@ -54,7 +54,6 @@ class AppText {
 
   // Experience
   static const expTitle = Tr('경력', 'Work Experience');
-  static const expPresent = Tr('진행 중', 'Present');
   static const overseasTitle = Tr('해외 경험', 'Global Experience');
 
   // Education
