@@ -31,3 +31,6 @@ migrate_working_dir/
 
 .firebase/
 firebase-debug.log
+
+# Claude Code 로컬 설정 (머신별 경로가 들어가므로 공유하지 않는다)
+.claude/settings.local.json
