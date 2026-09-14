@@ -20,6 +20,7 @@ class ProjectItem {
   final bool imagesArePortrait;
   final List<String> detailParasKo;
   final List<String> detailParasEn;
+  final String? storeUrl;
 
   const ProjectItem({
     required this.titleKo,
@@ -43,6 +44,7 @@ class ProjectItem {
     this.imagesArePortrait = false,
     this.detailParasKo = const [],
     this.detailParasEn = const [],
+    this.storeUrl,
   });
 }
 
@@ -95,6 +97,7 @@ const List<ProjectItem> allProjects = [
     isKey: true,
     images: ['assets/project/dplanit_moming/dm1.png', 'assets/project/dplanit_moming/dm2.jpeg'],
     imagesArePortrait: true,
+    storeUrl: 'https://play.google.com/store/apps/details?id=com.dable.dplanit&hl=ko',
   ),
   ProjectItem(
     titleKo: '시켜줘, 명예소방관 — 개인화 재난 경보',
@@ -222,6 +225,7 @@ const List<ProjectItem> allProjects = [
         'Successfully launched the companys first in-app purchase service simultaneously on both App Store and Google Play.',
     images: ['assets/project/dplanit_plus/dpp1.png', 'assets/project/dplanit_plus/dpp2.png'],
     imagesArePortrait: true,
+    storeUrl: 'https://play.google.com/store/apps/details?id=com.dable.dplanitplus&hl=ko',
   ),
 ];
 

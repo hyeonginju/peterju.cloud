@@ -242,6 +242,9 @@ class ProjectsSection extends StatefulComponent {
       margin: .zero,
       raw: {'line-height': '1.8'},
     ),
+    css('.proj-link').styles(
+      margin: Spacing.only(top: 20.px),
+    ),
     css('.proj-impact').styles(
       display: .flex,
       flexDirection: .column,
@@ -391,6 +394,16 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               div(classes: 'proj-notes', [
                 span(classes: 'notes-label', [.text(AppText.projectDeepDive(lang))]),
                 for (final para in paras) div(classes: 'notes-text', [.text(para)]),
+              ]),
+            if (p.storeUrl != null)
+              div(classes: 'proj-link', [
+                a(
+                  href: p.storeUrl!,
+                  target: Target.blank,
+                  attributes: {'rel': 'noopener noreferrer'},
+                  classes: 'visit-btn',
+                  [.text(AppText.viewOnGooglePlay(lang))],
+                ),
               ]),
           ]),
       ],

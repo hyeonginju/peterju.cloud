@@ -45,6 +45,7 @@ class AppText {
   static const projectResult = Tr('결과', 'Result');
   static const projectImpact = Tr('비즈니스 임팩트', 'Business Impact');
   static const projectDeepDive = Tr('설계 기록', 'Engineering Notes');
+  static const viewOnGooglePlay = Tr('Google Play에서 보기', 'View on Google Play');
 
   // Side Projects
   static const sideTitle = Tr('사이드 프로젝트', 'Side Projects');
