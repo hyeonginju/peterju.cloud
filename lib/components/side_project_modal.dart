@@ -49,7 +49,8 @@ class _SideProjectModalState extends State<SideProjectModal> {
               div(classes: 'sp-modal-header', [
                 div(classes: 'sp-modal-title-wrap', [
                   span(
-                    classes: 'sp-modal-logo ${proj.logoIsKorean ? 'sp-modal-logo--ko' : ''}',
+                    classes:
+                        'sp-modal-logo ${proj.logoIsKorean ? 'sp-modal-logo--ko' : ''} ${proj.logoIsOutlined ? 'sp-modal-logo--outline' : ''}',
                     attributes: proj.logoColor != null ? {'style': 'color: ${proj.logoColor}'} : {},
                     [.text(proj.logoText ?? proj.name)],
                   ),
@@ -79,9 +80,21 @@ class _SideProjectModalState extends State<SideProjectModal> {
                       ],
                     ),
                 ]),
-              div(classes: 'sp-modal-body', [
-                for (final para in paras) p(classes: 'sp-modal-para', [.text(para)]),
-              ]),
+              if (proj.problemKo != null) ...[
+                div(classes: 'proj-details', [
+                  _detailBlock('🔍', AppText.projectProblem(lang), lang == 'ko' ? proj.problemKo! : proj.problemEn!),
+                  _detailBlock('⚡', AppText.projectAction(lang), lang == 'ko' ? proj.actionKo! : proj.actionEn!),
+                  _detailBlock('✅', AppText.projectResult(lang), lang == 'ko' ? proj.resultKo! : proj.resultEn!),
+                ]),
+                if (paras.isNotEmpty)
+                  div(classes: 'proj-notes', [
+                    span(classes: 'notes-label', [.text(AppText.projectDeepDive(lang))]),
+                    for (final para in paras) div(classes: 'notes-text', [.text(para)]),
+                  ]),
+              ] else
+                div(classes: 'sp-modal-body', [
+                  for (final para in paras) p(classes: 'sp-modal-para', [.text(para)]),
+                ]),
               if (proj.url != null)
                 div(classes: 'sp-modal-link', [
                   a(
@@ -121,6 +134,16 @@ class _SideProjectModalState extends State<SideProjectModal> {
     );
   }
 
+  Component _detailBlock(String icon, String label, String text) {
+    return div(classes: 'detail-block', [
+      span(classes: 'detail-icon', [.text(icon)]),
+      div(classes: 'detail-content', [
+        span(classes: 'detail-label', [.text(label)]),
+        p(classes: 'detail-text', [.text(text)]),
+      ]),
+    ]);
+  }
+
   static final List<StyleRule> _styles = [
     css('.sp-modal-overlay').styles(
       position: Position.fixed(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
@@ -135,7 +158,7 @@ class _SideProjectModalState extends State<SideProjectModal> {
     css('.sp-modal-card').styles(
       backgroundColor: Color('#FFFFFF'),
       radius: .all(.circular(20.px)),
-      maxWidth: 720.px,
+      maxWidth: 1080.px,
       width: 100.percent,
       maxHeight: 88.vh,
       shadow: BoxShadow(offsetX: 0.px, offsetY: 24.px, blur: 64.px, color: Color('rgba(56,189,248,0.25)')),
@@ -173,6 +196,14 @@ class _SideProjectModalState extends State<SideProjectModal> {
       fontSize: 1.25.rem,
       fontWeight: .w800,
       fontFamily: .inherit,
+    ),
+    css('.sp-modal-logo--outline').styles(
+      color: Color('#FFFFFF'),
+      raw: {
+        '-webkit-text-stroke': '1.5px #0F172A',
+        'paint-order': 'stroke fill',
+        'text-shadow': '0 2px 6px rgba(15,23,42,0.35)',
+      },
     ),
     css('.sp-modal-name').styles(
       fontSize: 0.875.rem,

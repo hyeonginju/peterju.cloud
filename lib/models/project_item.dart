@@ -240,6 +240,13 @@ class SideProjectItem {
   final String? logoColor;
   final String? logoText;
   final bool logoIsKorean;
+  final bool logoIsOutlined;
+  final String? problemKo;
+  final String? problemEn;
+  final String? actionKo;
+  final String? actionEn;
+  final String? resultKo;
+  final String? resultEn;
   final List<String> modalTags;
   final List<String> detailImages;
   final List<String> detailParasKo;
@@ -257,6 +264,13 @@ class SideProjectItem {
     this.logoColor,
     this.logoText,
     this.logoIsKorean = false,
+    this.logoIsOutlined = false,
+    this.problemKo,
+    this.problemEn,
+    this.actionKo,
+    this.actionEn,
+    this.resultKo,
+    this.resultEn,
     this.modalTags = const [],
     this.detailImages = const [],
     this.detailParasKo = const [],
@@ -264,10 +278,63 @@ class SideProjectItem {
     this.detailImagesAreLandscape = false,
   });
 
-  bool get hasDetail => detailParasKo.isNotEmpty || detailImages.isNotEmpty;
+  bool get hasDetail => problemKo != null || detailParasKo.isNotEmpty || detailImages.isNotEmpty;
 }
 
 const List<SideProjectItem> sideProjects = [
+  SideProjectItem(
+    name: 'CLOCKIN',
+    descKo:
+        '지인이 운영하는 음식점의 근태 관리를 수기로 작성하고 있었고, 월말에 월급 계산을 할 때 시간도 오래걸리고 실수도 잦았습니다. 매장에 붙은 QR을 찍고 버튼 하나로 출퇴근하는 직원용 모바일 웹과, 기록·일정·요청 승인·근무시간표·월급 계산을 한곳에서 처리하는 관리자 화면을 만들었습니다. 기획부터 배포·운영까지 혼자 완결해 첫 매장에서 직원 3명이 사용 중이며, 서버 비용은 무료 플랜 안에서 0원으로 유지합니다.',
+    descEn:
+        'A friend runs a restaurant where attendance was still written down by hand, and month-end payroll took a long time and often came out wrong. I built an employee mobile web app — scan the QR posted in the store, clock in or out with one button — and an admin side that handles records, schedules, request approvals, timesheets, and payroll in one place. I owned it from planning through deployment and operations; 3 staff at the first store use it daily, and infrastructure stays at zero cost on free tiers.',
+    tags: ['Next.js', 'PostgreSQL', 'Netlify'],
+    modalTags: [
+      'Next.js 16',
+      'TypeScript',
+      'Tailwind CSS',
+      'Drizzle ORM',
+      'PostgreSQL',
+      'argon2id',
+      'Netlify',
+      'Docker',
+    ],
+    logoText: 'CLOCKIN',
+    logoIsOutlined: true,
+    detailImages: [
+      'assets/project/clockin/ck1.webp',
+      'assets/project/clockin/ck2.webp',
+      'assets/project/clockin/ck3.webp',
+      'assets/project/clockin/ck4.webp',
+    ],
+    detailImagesAreLandscape: true,
+    problemKo:
+        '지인이 운영하는 음식점의 근태 관리를 수기로 작성하고 있었고, 월말에 월급 계산을 할 때 시간도 오래걸리고 실수도 잦았습니다.',
+    problemEn:
+        'A friend runs a restaurant where attendance was still written down by hand, and month-end payroll took a long time and often came out wrong.',
+    actionKo:
+        '매장에 붙은 QR을 찍고 버튼 하나로 출퇴근하는 직원용 모바일 웹과, 기록·일정·요청 승인·근무시간표·월급 계산을 한곳에서 처리하는 관리자 화면을 만들었습니다. 모든 시각은 휴대폰이 아닌 서버 시각 기준이고, 직원이 입력한 시각과 실제 등록 시각을 함께 저장해 사후에 검증할 수 있게 했습니다. 일정에 없던 사람이 출근하면 인원 변경을 자동으로 감지하고, 모든 수정은 변경 전·후 값과 사유를 감사 로그로 남깁니다. 매장은 경로(/{매장})로 구분해 DNS 설정 없이 매장을 늘릴 수 있는 구조로 설계했습니다.',
+    actionEn:
+        'I built an employee mobile web app — scan the QR posted in the store, clock in or out with one button — and an admin side that handles records, schedules, request approvals, timesheets, and payroll in one place. Every timestamp is anchored to server time rather than the phone clock, and both the time the employee entered and the time the server actually recorded are stored so anything can be audited later. When someone works a shift they were not scheduled for, the staffing change is detected automatically, and every edit leaves an audit log with before/after values and a reason. Stores are separated by path (/{store}), so adding one takes no DNS work.',
+    resultKo:
+        '기획서 작성부터 6단계 개발, 실기기 QA, 프로덕션 배포·도메인 연결까지 혼자 완결했습니다. 첫 매장 「신야」가 clockin.peterju.cloud에서 운영 중이며, 직원 3명이 월 50건 이상의 출퇴근을 기록합니다. 월말 정산은 손계산에서 자동 집계로 바뀌어 사장님의 정산 작업 시간이 크게 줄었고, 서버 비용은 무료 플랜 안에서 0원으로 유지합니다.',
+    resultEn:
+        'I planned it, built it in six stages, QA\'d it on real devices, and shipped it to production with the domain wired up — all solo. The first store, Sinya, runs on clockin.peterju.cloud, where 3 staff log 50+ clock-ins a month. Month-end settlement moved from hand calculation to automatic aggregation, cutting the owner\'s payroll work sharply, while infrastructure stays at zero cost on free tiers.',
+    detailParasKo: [
+      '「직원이 기억으로 적는 시각을, 다툼 없는 급여 근거로 어떻게 바꿀까?」 이건 버튼 하나의 문제가 아니라 시간 규칙과 기록 신뢰성의 문제였습니다.',
+      '출퇴근 화면의 기본값은 휴대폰 시계가 아니라 서버 시각에 화면을 연 뒤 지난 시간을 더한 값입니다. 직원은 시각을 고칠 수 있지만, 입력 시각이 현재와 30분 이상 다르거나 근무가 12시간을 넘으면 서버가 먼저 확인을 요구하고, 실제 등록 시각은 수정할 수 없게 따로 남깁니다. 자정을 넘긴 근무는 출근일에 귀속하고, 같은 직원의 근무가 겹치지 않도록 등록을 행 잠금(FOR UPDATE) 트랜잭션으로 직렬화해 버튼을 연타해도 한 건만 저장됩니다. QR 통과 표시는 HMAC으로 서명한 10분짜리 쿠키라 위조하거나 미리 받아 둘 수 없고, QR이 밖으로 새면 관리자가 재발급해 예전 QR을 바로 무효로 만듭니다.',
+      '급여 규칙은 판정 근거가 바뀌면 과거 기록도 다시 계산되도록 저장 대신 조회 시 계산했습니다. 지각은 그날 일정 중 출근과 가장 가까운 시작 시각 기준, 주휴수당은 주 15시간 이상·결근 없는 주에 min(주 시간, 40) ÷ 5, 월 경계 주는 일요일이 속한 달에 넣습니다. 공제율은 만분율 정수로 계산해 부동소수 오차를 없앴고, 근무시간은 1분 단위 내림 없음을 기본으로 두어 실제 일한 시간보다 적게 지급되는 일이 없게 했습니다. 이 규칙들은 단위 테스트 82개로 고정하고, 가짜 매장 데이터로 손계산과 한 원 단위까지 맞췄습니다.',
+      '인증은 이메일 기반 Supabase Auth 대신 직접 만들었습니다. 한글 아이디·숫자 비밀번호라는 현장 요구에 맞추고, iOS 한글 자모 분리를 막으려 아이디를 NFC 정규화합니다. 서버 저장형 세션 토큰을 HttpOnly 쿠키에 담아 퇴사·비밀번호 재설정 시 즉시 끊을 수 있게 했고, 5회 실패 시 15분 잠금과 IP 제한을 걸었습니다. 카카오톡·네이버 QR 스캐너의 앱 내 브라우저는 쿠키가 따로 놀아 로그인이 풀리기 때문에, 진입을 감지해 기본 브라우저로 안내합니다.',
+      '인프라는 매장 운영에 상업적 이용이 허용되는 Netlify 무료 플랜을 고르고, 함수 리전(Ohio)에 맞춰 DB도 같은 리전에 두었습니다. DB를 서울에 두면 쿼리마다 태평양을 건너 요청 하나에 수 초가 걸리지만, 같은 리전이면 한국과 미국 왕복은 요청당 한 번뿐입니다. 프로덕션 배포 1회가 월 크레딧의 5%를 쓰기 때문에 Git 자동 배포를 끄고 로컬 Docker DB → 미리보기 배포 → 승인 후 프로덕션 순서로만 배포합니다. Mac에서 빌드한 묶음에 Linux용 argon2 바이너리가 빠져 함수에서 로그인이 실패하던 문제를 파일 추적 설정으로 잡고, DB 테이블에 RLS를 걸어 공개 API 노출을 막고, 주 1회 자동 백업과 복원 시험까지 마친 것이 이 프로젝트입니다.',
+    ],
+    detailParasEn: [
+      '"How do I turn a time an employee writes down from memory into payroll evidence nobody can argue with?" That is not a button problem — it is a problem of time rules and the trustworthiness of the record.',
+      'The clock-in screen defaults to server time plus the time elapsed since the screen opened, never the phone clock. Employees can correct the time, but if the entered time differs from now by more than 30 minutes, or the shift runs past 12 hours, the server asks for confirmation first — and the actual recording time is kept separately where it cannot be edited. Work past midnight belongs to the day it started, and registration is serialized in a row-locking (FOR UPDATE) transaction so one employee can never hold overlapping shifts and hammering the button still saves exactly one record. The QR pass is an HMAC-signed cookie good for 10 minutes, so it can be neither forged nor collected in advance, and if a QR leaks the admin reissues it and the old one dies instantly.',
+      'Payroll is computed at read time rather than stored, so past records recalculate when the rules behind them change. Lateness is measured against whichever scheduled start is closest to that day\'s clock-in; weekly holiday pay applies to weeks of 15+ hours with no absence, at min(weekly hours, 40) / 5; a week straddling two months counts toward the month its Sunday falls in. Deduction rates are computed as integer basis points to eliminate floating-point error, and hours default to one-minute granularity with no rounding down, so nobody is ever paid for less time than they worked. 82 unit tests pin these rules down, reconciled against hand calculations on seeded store data to the won.',
+      'I wrote authentication myself instead of using email-based Supabase Auth. It had to fit what the floor actually wanted — Korean usernames and numeric passwords — and usernames are NFC-normalized so iOS does not split Hangul jamo. Server-stored session tokens live in HttpOnly cookies so access is cut the moment someone leaves or resets a password, with a 15-minute lockout after 5 failures and IP limits on top. KakaoTalk and Naver QR scanners open in-app browsers whose cookies live in their own jar, silently dropping the login, so the app detects them and guides the user to the default browser.',
+      'For infrastructure I chose Netlify\'s free plan, which permits the commercial use a store needs, and placed the database in the same region as the functions (Ohio). A database in Seoul would cross the Pacific on every query, costing seconds per request; in the same region, the Korea-to-US round trip happens once per request. A single production deploy burns 5% of the monthly credit, so Git auto-deploy is off and releases only go local Docker DB, preview deploy, then production after approval. Fixing a login failure where the Mac-built bundle shipped no Linux argon2 binary, locking the tables down with RLS so the public API cannot reach them, and setting up weekly automated backups with a tested restore is where this project landed.',
+    ],
+  ),
   SideProjectItem(
     name: 'LIKID',
     descKo:
@@ -284,19 +351,23 @@ const List<SideProjectItem> sideProjects = [
       'assets/project/likid/likid3.png',
     ],
     detailImagesAreLandscape: true,
+    problemKo:
+        '플랫폼에 입점하면 당장은 편합니다. 대신 수수료율, 화면 편집 자유도, 사용성까지 전부 플랫폼 정책에 묶입니다. 정책이나 수수료가 바뀌면 그대로 받아들일 수밖에 없습니다. 브랜드 정체성을 그대로 드러내면서 수익 구조를 직접 통제하려면 자기 서비스가 필요했고, 동시에 개발자가 상주하지 않아도 매일 굴러가야 했습니다.',
+    problemEn:
+        'Listing on a marketplace is convenient today. In exchange, your commission rate, your layout freedom, and your usability are all bound to platform policy — and when the policy or the fee changes, you simply absorb it. Showing the brand identity as intended while controlling the revenue structure required our own service, and it had to keep running every day without a developer on site.',
+    actionKo:
+        '커머스 프론트엔드는 Next.js로 상품 전시·장바구니·주문 흐름을 구현하고, 브랜드 톤에 맞춘 갤러리형 레이아웃을 직접 설계했습니다. 백엔드는 Nest.js로 상품·주문·회원·재고 도메인을 구성하고, 상태 전이 규칙(결제대기 → 배송중 → 완료, 취소 시 재고 복구)을 클라이언트가 아닌 서버에서 강제했습니다. 어드민은 지표 대시보드가 아니라 「처리할 일」 우선순위로 구성했습니다. 결제를 기다리는 주문, 못 나간 알림, 품절인데 노출 중인 상품처럼 사고가 될 항목을 급한 순서로 맨 위에 띄워, 운영자가 무엇부터 볼지 고민하지 않게 했습니다.',
+    actionEn:
+        'I built the storefront in Next.js — product display, cart, and checkout flow — and designed a gallery-style layout matched to the brand tone. The backend is Nest.js, structuring the product, order, member, and inventory domains, with state-transition rules (awaiting payment to shipping to complete, inventory restored on cancellation) enforced on the server rather than the client. The admin is organized around what needs handling, not around metrics. Orders awaiting payment, notifications that failed to send, products still listed while out of stock — anything that could become an incident surfaces at the top in order of urgency, so the operator never has to work out what to look at first.',
+    resultKo:
+        '기획부터 프론트엔드·백엔드까지 혼자 완결해 Vercel에 배포했습니다. 플랫폼 수수료와 정책 변화에 종속되지 않는 자체 판매 채널을 확보했고, Flutter 외 웹 생태계에서도 제품을 끝까지 만들어낼 수 있음을 검증했습니다.',
+    resultEn:
+        'I owned it from planning through frontend and backend and shipped it on Vercel. It secured a sales channel that does not depend on platform fees or policy shifts, and it proved I can carry a product all the way through in the web ecosystem, not only in Flutter.',
     detailParasKo: [
-      '플랫폼에 입점하면 당장은 편합니다. 대신 수수료율, 화면 편집 자유도, 사용성까지 전부 플랫폼 정책에 묶입니다. 정책이나 수수료가 바뀌면 그대로 받아들일 수밖에 없습니다. 브랜드 정체성을 그대로 드러내면서 수익 구조를 직접 통제하려면 자기 서비스가 필요했고, 동시에 개발자가 상주하지 않아도 매일 굴러가야 했습니다.',
-      '커머스 프론트엔드는 Next.js로 상품 전시·장바구니·주문 흐름을 구현하고, 브랜드 톤에 맞춘 갤러리형 레이아웃을 직접 설계했습니다. 백엔드는 Nest.js로 상품·주문·회원·재고 도메인을 구성하고, 상태 전이 규칙(결제대기 → 배송중 → 완료, 취소 시 재고 복구)을 클라이언트가 아닌 서버에서 강제했습니다.',
-      '어드민은 지표 대시보드가 아니라 「처리할 일」 우선순위로 구성했습니다. 결제를 기다리는 주문, 못 나간 알림, 품절인데 노출 중인 상품처럼 사고가 될 항목을 급한 순서로 맨 위에 띄워, 운영자가 무엇부터 볼지 고민하지 않게 했습니다.',
       '가장 신경 쓴 건 비개발자용 언어입니다. 화면마다 동작 규칙을 평서문으로 적어두어 — 「취소하면 재고가 돌아오고, 되돌릴 수 없습니다」처럼 — 별도 교육 없이도 운영자가 스스로 판단할 수 있게 구성했습니다.',
-      '기획부터 프론트엔드·백엔드까지 혼자 완결해 Vercel에 배포했습니다. 플랫폼 수수료와 정책 변화에 종속되지 않는 자체 판매 채널을 확보했고, Flutter 외 웹 생태계에서도 제품을 끝까지 만들어낼 수 있음을 검증했습니다.',
     ],
     detailParasEn: [
-      'Listing on a marketplace is convenient today. In exchange, your commission rate, your layout freedom, and your usability are all bound to platform policy — and when the policy or the fee changes, you simply absorb it. Showing the brand identity as intended while controlling the revenue structure required our own service, and it had to keep running every day without a developer on site.',
-      'I built the storefront in Next.js — product display, cart, and checkout flow — and designed a gallery-style layout matched to the brand tone. The backend is Nest.js, structuring the product, order, member, and inventory domains, with state-transition rules (awaiting payment to shipping to complete, inventory restored on cancellation) enforced on the server rather than the client.',
-      'The admin is organized around what needs handling, not around metrics. Orders awaiting payment, notifications that failed to send, products still listed while out of stock — anything that could become an incident surfaces at the top in order of urgency, so the operator never has to work out what to look at first.',
       'What I cared about most was writing for non-developers. Every screen states its behavior in plain sentences — "cancelling returns the stock, and cannot be undone" — so an operator can decide on their own without a training session.',
-      'I owned it from planning through frontend and backend and shipped it on Vercel. It secured a sales channel that does not depend on platform fees or policy shifts, and it proved I can carry a product all the way through in the web ecosystem, not only in Flutter.',
     ],
   ),
   SideProjectItem(
@@ -313,15 +384,17 @@ const List<SideProjectItem> sideProjects = [
       'assets/project/weather/weather2.png',
       'assets/project/weather/weather3.png',
     ],
-    detailParasKo: [
-      '기상청 공식 데이터는 국내에서 가장 정확하고 신뢰할 수 있지만, 정작 공식 앱의 UI는 복잡하고 불편해 그 좋은 데이터의 가치를 제대로 살리지 못했습니다. 믿을 수 있는 데이터를 누구나 한눈에 볼 수 있는 직관적인 화면으로 다시 설계하고 싶어 직접 개발을 시작했습니다.',
-      '기획부터 디자인, 개발까지 전 과정을 AI 툴로 연결한 AI-driven 프로젝트입니다. 화면 설계와 카피라이팅, 코드 작성까지 AI와 협업하며 혼자서도 빠르게 완성도 높은 서비스를 만들었습니다.',
-      'GitHub Actions 기반 자동 배포 파이프라인을 구축하고, cron & Firestore를 결합해 운영 비용 없이 동작하는 기상특보 푸시 알림 시스템을 만들었습니다. 또한 Flutter에 안드로이드 네이티브 코드를 결합해 홈 화면에서 바로 날씨를 확인할 수 있는 위젯을 직접 구현했습니다.',
-    ],
-    detailParasEn: [
-      'KMA\'s official data is the most accurate and reliable in Korea, yet the official app\'s clunky, dated UI never let that data shine. I built this app to deliver trustworthy weather through a clean, at-a-glance interface anyone can read instantly.',
-      'It\'s my first fully AI-driven project — connecting planning, design, and development end-to-end with AI tools. Collaborating with AI on screen design, copywriting, and code let me ship a polished service quickly, on my own.',
-      'I set up an automated deployment pipeline with GitHub Actions, and built a zero-cost weather-alert push system by combining cron-job.org with Firestore. I also bridged Flutter with native Android code to build home-screen widgets that show the forecast at a glance.',
-    ],
+    problemKo:
+        '기상청 공식 데이터는 국내에서 가장 정확하고 신뢰할 수 있지만, 정작 공식 앱의 UI는 복잡하고 불편해 그 좋은 데이터의 가치를 제대로 살리지 못했습니다. 믿을 수 있는 데이터를 누구나 한눈에 볼 수 있는 직관적인 화면으로 다시 설계하고 싶어 직접 개발을 시작했습니다.',
+    problemEn:
+        'KMA\'s official data is the most accurate and reliable in Korea, yet the official app\'s clunky, dated UI never let that data shine. I built this app to deliver trustworthy weather through a clean, at-a-glance interface anyone can read instantly.',
+    actionKo:
+        '기획부터 디자인, 개발까지 전 과정을 AI 툴로 연결한 AI-driven 프로젝트입니다. 화면 설계와 카피라이팅, 코드 작성까지 AI와 협업하며 혼자서도 빠르게 완성도 높은 서비스를 만들었습니다. GitHub Actions 기반 자동 배포 파이프라인을 구축하고, cron & Firestore를 결합해 운영 비용 없이 동작하는 기상특보 푸시 알림 시스템을 만들었습니다. 또한 Flutter에 안드로이드 네이티브 코드를 결합해 홈 화면에서 바로 날씨를 확인할 수 있는 위젯을 직접 구현했습니다.',
+    actionEn:
+        'It\'s my first fully AI-driven project — connecting planning, design, and development end-to-end with AI tools. Collaborating with AI on screen design, copywriting, and code let me ship a polished service quickly, on my own. I set up an automated deployment pipeline with GitHub Actions, and built a zero-cost weather-alert push system by combining cron-job.org with Firestore. I also bridged Flutter with native Android code to build home-screen widgets that show the forecast at a glance.',
+    resultKo:
+        '믿을 수 있는 기상청 공식 데이터를 그대로 쓰면서, 필요한 정보가 한눈에 읽히도록 화면을 다시 설계한 날씨 앱을 완성했습니다. 지금은 공식 앱 대신 직접 만든 앱을 매일 쓰고 있고, 홈 화면 위젯과 기상특보 알림까지 운영 비용 없이 돌아갑니다.',
+    resultEn:
+        'The result is a weather app that keeps the KMA\'s official data exactly as it is while redesigning the screen so what matters reads at a glance. I now use it daily in place of the official app, and the home-screen widget and weather-alert notifications keep running at no operating cost.',
   ),
 ];

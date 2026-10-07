@@ -52,7 +52,8 @@ class _SideProjectCardState extends State<SideProjectCard> {
         div(classes: 'side-card-top', [
           div(classes: 'side-card-logo', [
             span(
-              classes: 'side-logo-text ${proj.logoIsKorean ? 'side-logo-text--ko' : ''}',
+              classes:
+                  'side-logo-text ${proj.logoIsKorean ? 'side-logo-text--ko' : ''} ${proj.logoIsOutlined ? 'side-logo-text--outline' : ''}',
               attributes: proj.logoColor != null
                   ? {'style': 'color: ${proj.logoColor}'}
                   : {},
@@ -129,6 +130,14 @@ class _SideProjectCardState extends State<SideProjectCard> {
       letterSpacing: (-0.02).em,
       fontFamily: .inherit,
       raw: {'word-break': 'keep-all', 'line-height': '31px'},
+    ),
+    css('.side-logo-text--outline').styles(
+      color: Color('#FFFFFF'),
+      raw: {
+        '-webkit-text-stroke': '1.5px #0F172A',
+        'paint-order': 'stroke fill',
+        'text-shadow': '0 2px 6px rgba(15,23,42,0.35)',
+      },
     ),
     css('.side-card-tags').styles(
       display: .flex,
