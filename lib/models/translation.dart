@@ -21,8 +21,8 @@ class AppText {
     'Solving business problems,\nnot just writing code',
   );
   static const heroDescription = Tr(
-    '제조 공장 현장에서 스타트업 리드까지 — 실전에서 답을 찾는 엔지니어',
-    'From factory floor to startup lead — an engineer who finds answers in the field.',
+    '제조 공장 현장에서 프로젝트 리드까지 — 실전에서 답을 찾는 엔지니어',
+    'From factory floor to project lead — an engineer who finds answers in the field.',
   );
   static const heroCta = Tr('프로젝트 보기', 'View Projects');
   static const heroContact = Tr('연락하기', 'Contact');
