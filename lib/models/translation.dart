@@ -15,7 +15,7 @@ class AppText {
   static const langEn = Tr('EN', 'EN');
 
   // Hero
-  static const heroTag = Tr('SOFTWARE ENGINEER', 'SOFTWARE ENGINEER');
+  static const heroTag = Tr('Forward Deployed Engineer', 'Forward Deployed Engineer');
   static const heroHeadline = Tr(
     '코드 너머의 비즈니스 문제를 해결합니다.',
     'Solving business problems,\nnot just writing code',
